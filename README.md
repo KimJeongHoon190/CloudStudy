@@ -9,4 +9,4 @@
 ```열심히 하는 엔지니어, 복습은 그 날 바로!!!```
 
 
-![캡쳐10](https://img.shields.io/badge/Virtualbox-183A61?style=flat&logo=virtualbox&logoColor=white)![캡쳐12](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=Linux&logoColor=white)![캡쳐11](https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white)![캡쳐13](https://img.shields.io/badge/Cisco-1BA0D7?style=flat&logo=Cisco&logoColor=white)
+![캡쳐10](https://img.shields.io/badge/Virtualbox-183A61?style=flat&logo=virtualbox&logoColor=white)![캡쳐12](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=Linux&logoColor=white)![캡쳐11](https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white)![캡쳐13](https://img.shields.io/badge/Cisco-1BA0D7?style=flat&logo=Cisco&logoColor=white)![캡쳐14](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)![캡쳐15](https://img.shields.io/badge/Github-181717?style=flat&logo=github&logoColor=white)

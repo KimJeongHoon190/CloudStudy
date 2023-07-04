@@ -9,4 +9,4 @@
 ```열심히 하는 엔지니어, 복습은 그 날 바로!!!```
 
 
-![캡쳐11](https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white)
+![캡쳐11](https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white)![캡쳐12](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=Linux&logoColor=white)

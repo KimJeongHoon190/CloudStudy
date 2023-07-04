@@ -6,6 +6,7 @@ sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg
 ```
 
+## Docker에서 제공하는 패키지 저장소 등록
 
 ## 패키지 저장소에서 제공하는 인증키(gpg) 등록
 ```bash

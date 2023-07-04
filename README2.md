@@ -18,7 +18,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.gpg
 ```bash
 echo \
  "deb [arc="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings]
-
+```
 
  ### 등록한 패키지 저장소 적용
 

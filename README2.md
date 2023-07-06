@@ -37,3 +37,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```bash
 docker -v
 ```
+
+
+### Docker Token 등록
+env/docker_token 파일을 생성하여 [docker hub](https://hub.docker.com/settings/security) 
+사이트 접속하여 생성한 Token을 등록합니다.

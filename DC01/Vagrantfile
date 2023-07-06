@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
         sudo apt-get update -y
         sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
         sudo usermod -a -G docker vagrant
-        docker login -u hedgehoon --password dckr_pat_eHPBmxk3ipysW8wDdgMhPTBXpKw
+        docker login -u hedgehoon --password-stdin < /vagrant/env/docker_token
         docker run -it -d -p 8080:80 --name web-server1 nginx
         docker run -it -d -p 8081:80 --name web-server2 httpd
         docker cp /vagrant/htdocs/. web-server1:/usr/share/nginx/html

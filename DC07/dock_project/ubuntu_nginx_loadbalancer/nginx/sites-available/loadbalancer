@@ -1,6 +1,8 @@
 upstream loadbalancer {
 server web1 weight=5;
 server web2 weight=5;
+server web3 weight=5;
+server web4 weight=5;
 }
 
 server {

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web1:
+    image: 'hedgehoon/apache2'
+    networks:
+           - mynet
+  web2:
+    image: 'hedgehoon/nginx'
+    networks:
+        - mynet
+  web3:
+    image: 'hedgehoon/apache2'
+    networks:
+           - mynet
+  web4:
+    image: 'hedgehoon/nginx'
+    networks:
+           - mynet
+  lb:
+    image: 'loadbalancer:v0.3'
+    volumes:
+        - type: bind
+          source: ./ubuntu_nginx_loadbalancer/nginx/sites-available
+          target: /etc/nginx/sites-available
+    networks:
+            - mynet
+    ports:
+       - 80:80
+    depends_on:
+      - web1
+      - web2
+networks:
+  mynet:    

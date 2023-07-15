@@ -27,3 +27,7 @@
                                 loadbalancer
                         nginx.conf
                     Dockerfile
+
+
+### yaml 코드
+docker-compose.yaml

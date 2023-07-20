@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/focal64"
+  
+    config.vm.define "gw1" do |gw1|
+      gw1.vm.hostname = "gateway1"
+      gw1.vm.provider "virtualbox" do |vb|
+       vb.name = "gateway1"
+       vb.cpus = 2
+       vb.memory = 2048
+      end
+      gw.vm.network "public_network" 
+      gw.vm.network "private_network", ip: "192.168.123.254", virtualbox__intnet: true
+      gw.vm.provision "shell", inline: <<-SCRIPT
+      SCRIPT
+    end
+
+    config.vm.define "gw2" do |gw2|
+        gw2.vm.hostname = "gateway2"
+        gw2.vm.provider "virtualbox" do |vb|
+         vb.name = "gateway2"
+         vb.cpus = 2
+         vb.memory = 2048
+        end
+        gw.vm.network "public_network" 
+        gw.vm.network "private_network", ip: "192.168.223.254", virtualbox__intnet: true
+        gw.vm.provision "shell", inline: <<-SCRIPT
+        SCRIPT
+      end
+  
+  
+    config.vm.define "Docker" do |Docker|
+      Docker.vm.hostname = "Docker"
+      Docker.vm.provider "virtualbox" do |vb|
+       vb.name = "Docker"
+       vb.cpus = 2
+       vb.memory = 2048
+      end
+      Docker.vm.network "private_network", ip: "192.168.223.20", virtualbox__intnet: true
+      Docker.vm.provision "shell", inline: <<-SCRIPT       
+      SCRIPT
+    end
+  
+  
+  
+    config.vm.define "Docker_Registry" do |Docker_Registry|
+      Docker_Registry.vm.hostname = "docker-registry"
+      Docker_Registry.vm.provider "virtualbox" do |vb|
+       vb.name = "docker-registry"
+       vb.cpus = 2
+       vb.memory = 2048
+      end
+      Docker_Registry.vm.network "private_network", ip: "192.168.123.10", virtualbox__intnet: true
+      Docker_Registry.vm.network "private_network", ip: "192.168.223.10", virtualbox__intnet: true
+      Docker_Registry.vm.provision "shell", inline: <<-SCRIPT
+      SCRIPT
+    end
+  
+  end

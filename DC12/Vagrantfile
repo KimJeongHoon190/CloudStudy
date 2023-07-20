@@ -11,9 +11,9 @@ Vagrant.configure("2") do |config|
        vb.cpus = 2
        vb.memory = 2048
       end
-      gw.vm.network "public_network" 
-      gw.vm.network "private_network", ip: "192.168.123.254", virtualbox__intnet: true
-      gw.vm.provision "shell", inline: <<-SCRIPT
+      gw1.vm.network "public_network" 
+      gw1.vm.network "private_network", ip: "192.168.123.254", virtualbox__intnet: true
+      gw1.vm.provision "shell", inline: <<-SCRIPT
       SCRIPT
     end
 
@@ -24,37 +24,37 @@ Vagrant.configure("2") do |config|
          vb.cpus = 2
          vb.memory = 2048
         end
-        gw.vm.network "public_network" 
-        gw.vm.network "private_network", ip: "192.168.223.254", virtualbox__intnet: true
-        gw.vm.provision "shell", inline: <<-SCRIPT
+        gw2.vm.network "public_network" 
+        gw2.vm.network "private_network", ip: "192.168.223.254", virtualbox__intnet: true
+        gw2.vm.provision "shell", inline: <<-SCRIPT
         SCRIPT
       end
   
   
-    config.vm.define "Docker" do |Docker|
-      Docker.vm.hostname = "Docker"
-      Docker.vm.provider "virtualbox" do |vb|
-       vb.name = "Docker"
+    config.vm.define "docker" do |docker|
+      docker.vm.hostname = "docker"
+      docker.vm.provider "virtualbox" do |vb|
+       vb.name = "docker"
        vb.cpus = 2
        vb.memory = 2048
       end
-      Docker.vm.network "private_network", ip: "192.168.223.20", virtualbox__intnet: true
-      Docker.vm.provision "shell", inline: <<-SCRIPT       
+      docker.vm.network "private_network", ip: "192.168.223.20", virtualbox__intnet: true
+      docker.vm.provision "shell", inline: <<-SCRIPT       
       SCRIPT
     end
   
   
   
-    config.vm.define "Docker_Registry" do |Docker_Registry|
-      Docker_Registry.vm.hostname = "docker-registry"
-      Docker_Registry.vm.provider "virtualbox" do |vb|
+    config.vm.define "docker_registry" do |docker_registry|
+      docker_registry.vm.hostname = "docker-registry"
+      docker_registry.vm.provider "virtualbox" do |vb|
        vb.name = "docker-registry"
        vb.cpus = 2
        vb.memory = 2048
       end
-      Docker_Registry.vm.network "private_network", ip: "192.168.123.10", virtualbox__intnet: true
-      Docker_Registry.vm.network "private_network", ip: "192.168.223.10", virtualbox__intnet: true
-      Docker_Registry.vm.provision "shell", inline: <<-SCRIPT
+      docker_registry.vm.network "private_network", ip: "192.168.123.10", virtualbox__intnet: true
+      docker_registry.vm.network "private_network", ip: "192.168.223.10", virtualbox__intnet: true
+      docker_registry.vm.provision "shell", inline: <<-SCRIPT
       SCRIPT
     end
   

@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
        vb.memory = 2048
       end
       gw.vm.network "public_network" #DHCP
-      gw.vm.network "private_network", ip: "192.168.33.254", virtualbox__intnet: true
+      gw.vm.network "private_network", ip: "192.168.123.254", virtualbox__intnet: true
       gw.vm.provision "shell", inline: <<-SCRIPT
       SCRIPT
     end
@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
        vb.cpus = 2
        vb.memory = 2048
       end
-      nginx_web.vm.network "private_network", ip: "192.168.33.10", virtualbox__intnet: true
+      nginx_web.vm.network "private_network", ip: "192.168.223.10", virtualbox__intnet: true
       nginx_web.vm.provision "shell", inline: <<-SCRIPT       
       SCRIPT
     end
@@ -39,9 +39,25 @@ Vagrant.configure("2") do |config|
        vb.cpus = 2
        vb.memory = 2048
       end
-      apache_web.vm.network "private_network", ip: "192.168.33.20", virtualbox__intnet: true
+      apache_web.vm.network "private_network", ip: "192.168.223.20", virtualbox__intnet: true
       apache_web.vm.provision "shell", inline: <<-SCRIPT
       SCRIPT
     end
   
+
+    config.vm.define "nginx_lb" do |nginx_lb|
+        nginx_lb.vm.hostname = "nginx-lb-server"
+        nginx_lb.vm.provider "virtualbox" do |vb|
+         vb.name = "nginx-lb-server"
+         vb.cpus = 2
+         vb.memory = 2048
+        end
+        # ubuntu 20.04의 인터페이스명 -> enp0s8
+        nginx_lb.vm.network "private_network", ip: "192.168.123.10", virtualbox__intnet: true
+        # ubuntu 20.04의 인터페이스명 -> enp0s9
+        nginx_lb.vm.network "private_network", ip: "192.168.223.1", virtualbox__intnet: true
+        nginx_lb.vm.provision "shell", inline: <<-SCRIPT
+        SCRIPT
+      end
+
   end

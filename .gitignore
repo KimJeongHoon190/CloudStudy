@@ -11,8 +11,6 @@
 ### Vagrant Patch ###
 *.box
 
-
-### Docker Token : 이건 보안상 깃허브에 변경 이력을 저장하지 않겠다.(.gitignore파일의 역할)###
+### Docker Token ###
 docker_token
 
-# End of https://www.toptal.com/developers/gitignore/api/vagrant

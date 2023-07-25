@@ -1,14 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: web-pod2
+  name: web-pod-httpd
   labels:
     app: web
-    app-type: nginx
+    app-type: apache
 spec:
   containers:
-  - name: container-name
-    image: nginx:latest
+  - name: apache-container
+    image: httpd:latest
+    env:
+      - name: hello
+        value: hi
+      - name: username
+        value: tester  
     resources:
       limits:
         memory: "128Mi"

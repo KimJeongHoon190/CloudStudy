@@ -1,18 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: myapp
+  name: web-pod1
   labels:
-    name: myapp
-    creator: hyun
-    version: "1"
-    date: "2023-07-25"
-    year: "2023"
-    month: "07"
-    day: "25"
+    app: web
+    app-type: nginx
 spec:
   containers:
-  - name: container-name
+  - name: nginx
     image: nginx:latest
     resources:
       limits:
@@ -20,6 +15,16 @@ spec:
         cpu: "250m"
     ports:
       - containerPort: 80
+  - name: alpine
+    image: alpine:latest
+    args:
+    - /bin/sh
+    - -c
+    - "while true; do echo 'running'; sleep; 10; done"
+    resources:
+      limits:
+        memory: "256Mi"
+        cpu: "500m" 
   imagePullSecrets:
   - name: docker-pull-secret
 
@@ -29,14 +34,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-name2
+  name: web-pod-httpd
   labels:
-    name: pod-name
-    creator: hoon
-    version: "1"
-    date: "2023-08"
-    year: "2023"
-    month: "07"
+    app: web
+    app-type: apache
 spec:
   containers:
   - name: apache-container

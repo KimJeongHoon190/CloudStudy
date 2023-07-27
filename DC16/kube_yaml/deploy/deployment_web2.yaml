@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-httpd
+spec:
+  selector:
+    matchLabels:
+      app: static-web
+      version: "3.0"
+      server: httpd
+      date: "2023-07"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: static-web
+        version: "3.0"
+        server: httpd
+        date: "2023-07"
+    spec:
+      containers:
+      - name: httpd-static-web
+        image: hedgehoon/httpd:3.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: docker-pull-secret

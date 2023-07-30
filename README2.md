@@ -38,6 +38,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ### 설치 후 확인
 ```bash
 docker -v
+<<<<<<< HEAD
 # Docker version 24.0.2, build cb74dfc
 ```
 
@@ -52,3 +53,5 @@ docker -v
 현재 README.md 파일이 있는 위치에 env 디렉토리를 생성하고 env 디렉토리 안에 
 docker_token 파일을 생성하여 [docker hub](https://hub.docker.com/settings/security) 
 사이트 접속하여 생성한 Token을 등록합니다.
+=======
+>>>>>>> 2f66deedea65e2242a8852066ebc89571b364bee

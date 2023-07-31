@@ -15,8 +15,8 @@ spec:
     ports:
       - containerPort: 80
   imagePullSecrets:
-  - name: docker-pull-secret    
---- 
+  - name: docker-pull-secret
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -34,7 +34,7 @@ spec:
     ports:
       - containerPort: 80
   imagePullSecrets:
-  - name: docker-pull-secret  
+  - name: docker-pull-secret
 ---
 apiVersion: v1
 kind: Service
@@ -57,7 +57,6 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -65,23 +64,32 @@ metadata:
   name: myingress
   labels:
     name: myingress
-  annotations: 
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/"
-    kubernetes.io/ingress.class: nginx  
 spec:
+  ingressClassName: nginx
   rules:
   - host: "kube.web.co.kr"
     http:
       paths:
       - pathType: Prefix
-        path: "/first"
+        path: /
         backend:
           service:
             name: first-service
             port: 
               number: 80
       - pathType: Prefix
-        path: "/second"
+        path: /first
+        backend:
+          service:
+            name: first-service
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /second
         backend:
           service:
             name: second-service
@@ -89,19 +97,30 @@ spec:
               number: 80
 
 
-# 인그레스(Ingress)
+# 인그레스(ingress)
 
-# 클러스터 외부에서 내부로의 접근 요청을  어떻게 처리할지 정의해 둔 규칙
+# 클러스터 외부에서 내부로의 접근 요청을 어떻게 처리할지 정의해 둔 규칙
 # 애플리케이션 수준의 접근 요청 처리 방법을 제공하며, URI 주소에 따라
-# 내부 백엔드 서비스의 연결을 제어하는 규틱을 정의할 수 있다.
+# 내부 백엔드 서비스의 연결을 제어하는 규칙을 정의할 수 있다.
 # 이 외에도 SSL 인증 처리 및 도메인 기반 가상 호스팅도 처리할 수 있다.
 
-# 인그레스를 사용하기 위해 인그레스 컨트롤러가 필요하여 인그레스 컨트롤러에 
+# 인그레스를 사용하기 위해 인그레스 컨트롤러가 필요하여 인그레스 컨트롤러에
 # 의해 인그레스에 정의된 규칙이 제어된다.
-# 대표적인 인그레스 컨트롤러는 ingress-nginx가 있다.
+# 대표적인 인그레스 컨트롤러는 ingress-nginx 가 있다.
 
 # git clone https://github.com/kubernetes/ingress-nginx.git
 # kubectl apply -f ingress-nginx/deploy/static/provider/baremetal
+
+
+# ingress 에 작성한 spec.rules[].host 정보와 http request 헤더의 host 정보가
+# 일치해야 rule 에 의한 서비스가 이루어짐.
+
+# 내부 서비스 구성이 다음과 같은 경우 LB 에서 host 정보를 변경하기 위한 추가 작업이
+# 필요함
+#     Client ---> Loadbalancer ---> Ingress ---> Service ---> pods
+# nginx 에서는 proxy_pass 구성 밑에 proxy_set_header Host <host> 가 필요
+# 또는 proxy_pass 에 upstream 정보와 매치 시키는 부분을 ingress 의 host 로 매치
+# 시키는 것도 가능(당연히 upstream 도 ingress 의 host 로 수정해야 함)
 
 
 

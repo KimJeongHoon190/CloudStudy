@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: user1-role
+  namespace: user-space
+rules:
+- apiGroups: [""] # Kubernetes API의 Group
+  resources: ["pods"] # Kubernetes API의 Group에 소속되어 있는 kind
+  verbs: ["create","get","list","watch","patch","delete"] # 리소스에 대한 조회/생성/삭제/수정등의 작업들

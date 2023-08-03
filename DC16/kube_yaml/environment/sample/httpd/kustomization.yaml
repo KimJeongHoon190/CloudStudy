@@ -1,0 +1,5 @@
+resources:
+- httpd_config_map.yaml
+- httpd_ssl_config_map.yaml
+- nginx_ssl_tls_secret.yaml
+- httpd_pod.yaml

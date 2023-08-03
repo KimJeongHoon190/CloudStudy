@@ -12,5 +12,20 @@ spec:
       limits:
         memory: "128Mi"
         cpu: "500m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: yourapp
+  labels:
+    name: yourapp
+spec:
+  containers:
+  - name: yourapp
+    image: nginx:latest
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"   
   imagePullSecrets:
   - name: docker-pull-secret    

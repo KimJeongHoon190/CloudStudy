@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata: 
+  name: user1
+secrets:
+  - apiVersion: v1
+    kind: Secret
+    name: user1-secret
+---
+apiVersion: v1    
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: user1-secret
+  annotations:
+    kubernetes.io/service-account.name: user1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

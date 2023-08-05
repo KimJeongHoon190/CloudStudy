@@ -1,0 +1,207 @@
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv1
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /mnt/nfs_share1
+    server: 192.168.10.14
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv2
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /mnt/nfs_share2
+    server: 192.168.10.14
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc1
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  volumeName: nfs-pv1
+  storageClassName: ""
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc2
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  volumeName: nfs-pv2
+  storageClassName: ""  
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firstdepoly
+  labels:
+    app: firstdepoly
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: firstdepolyapp
+      type: deploy
+  template:
+    metadata:
+      labels:
+        app: firstdepolyapp
+        type: deploy
+        version: "v1.0"
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nfs-volume
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: nfs-volume
+        persistentVolumeClaim:
+          claimName: nfs-pvc1
+      imagePullSecrets:
+      - name: docker-pull-secret    
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seconddepoly
+  labels:
+    app: seconddepoly
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: seconddepolyapp
+      type: deploy
+  template:
+    metadata:
+      labels:
+        app: seconddepolyapp
+        type: deploy
+        version: "v1.0"
+    spec:
+      containers:
+      - name: nginx
+        image: httpd:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nfs-volume
+          mountPath: /usr/local/apache2/htdocs
+      volumes:
+      - name: nfs-volume
+        persistentVolumeClaim:
+          claimName: nfs-pvc2
+      imagePullSecrets:
+      - name: docker-pull-secret    
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: firstservice
+spec:
+  selector:
+    app: firstdepolyapp
+  ports:
+  - port: 80
+    targetPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: secondservice
+spec:
+  selector:
+    app: seconddepolyapp
+  ports:
+  - port: 80
+    targetPort: 80
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  labels:
+    name: myingress
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "kube.home.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: firstservice
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /main
+        backend:
+          service:
+            name: firstservice
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /test
+        backend:
+          service:
+            name: secondservice
+            port: 
+              number: 80
+

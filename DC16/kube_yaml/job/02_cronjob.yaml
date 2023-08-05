@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mycronjob
+spec: 
+  #          분 시 일 월 요일
+  schedule: "10  *  *  *  *"    # 전부 * * * * *  이렇게 쓰면 1분 간격마다 계속 실행한다.// 10 * * * * 이렇게 쓰면 00시 10분, 01시 10분, 02시 10분 이렇게 실행한다
+  successfulJobsHistoryLimit: 5   # 히스토리에 기록하는 job 개수를 5개로 늘린다. kubectl get pods,job 명령어로 실시간 확인 가능
+  jobTemplate: 
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cronjob-container
+            image: alpine
+            command: ["/bin/sh","-c","echo 'Job Running'"]
+          restartPolicy: OnFailure
+
+#   */10 * * * * 이렇게 쓰면 10분 간격으로 실행
+#    0 7,12,23 * * 1-5            0: 일요일, 1: 월요일 ... 6:토요일
+# --> 주말 제외하고 매월 7시,12시,23시 정각에 실행    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

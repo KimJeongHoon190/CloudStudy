@@ -13,27 +13,24 @@ spec:
     spec:
       containers:
       - name: hpa-test
-        image: httpd:latest
+        image: httpd
         resources:
           limits:
             memory: "128Mi"
             cpu: "200m"
-        ports:
-        - containerPort: 80
       imagePullSecrets:
-      - name: docker-pull-secret  
+      - name: docker-pull-secret
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hpa-deploy-servic
+  name: hpa-deploy-service
 spec:
   selector:
     app: my-deployment
   ports:
   - port: 80
     targetPort: 80
-
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -42,9 +39,9 @@ metadata:
 spec:
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 30 #안정화된 후 30초 후에 스케일다운(사용 파드 개수 감소시키기) 진행
-      policies: #10초 간격으로 1개 파드씩 삭제 
-      - type: Pods 
+      stabilizationWindowSeconds: 30 # 안정화 된 후 30 초 이후에 스케일다운 진행
+      policies: # 10초 간격으로 1개 파드씩 삭제
+      - type: Pods
         value: 1
         periodSeconds: 10
       selectPolicy: Min

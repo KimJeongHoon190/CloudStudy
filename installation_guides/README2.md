@@ -38,10 +38,15 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ### 설치 후 확인
 ```bash
 docker -v
-<<<<<<< HEAD
 # Docker version 24.0.2, build cb74dfc
 ```
 
+### vagrant가 docker 명령어를 사용할 수 있게 만들기
+```bash
+sudo usermod -a -G docker vagrant : vagrant 계정을 docker 그룹에 가입시키므로 docker 명령어를 sudo 없이 사용가능하다.
+newgrp docker : 그룹 가입시킨 내용을 적용시키는 명령어
+groups : vagrant가 가입한 그룹 목록 확인
+```
 
 ### Docker Token 등록
 1. DC01 디렉토리로 이동

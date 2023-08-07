@@ -57,13 +57,10 @@ groups # vagrant가 가입한 그룹 목록 확인
 
 ### Docker Token을 가져와서 로컬 파일로 저장하기
 
-현재 README.md 파일이 있는 위치에 env 디렉토리를 생성하고 env 디렉토리 안에 
-docker_token 파일을 생성하여 [docker hub](https://hub.docker.com/settings/security) 
-사이트 접속하여 생성한 Token을 등록합니다.
+생성된 Docker Token을 /vagrant/env/docker_token 파일에 저장합니다. (해당 DC 디렉토리 밑의 env 폴더 내에 docker_token 파일 생성)
 
 ### Docker Token으로 로그인 성공하기
 
-도커 토큰 파일을 /vagrant/env/docker_token 경로에 저장합니다.
 ```bash
 docker login -u hedgehoon --password-stdin < /vagrant/env/docker_token
 # 해당 경로의 파일에 저장된 도커 토큰을 가져와 hedgehoon이라는 도커 계정으로 자동 로그인 합니다.

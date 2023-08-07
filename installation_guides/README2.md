@@ -55,6 +55,8 @@ groups # vagrant가 가입한 그룹 목록 확인
 4. [docker hub](https://hub.docker.com/settings/security) 사이트 접속
 5. docker token 생성 후 발급된 token을 docker_token에 기록 후 저장
 
+### Docker Token을 가져와서 로컬 파일로 저장하기
+
 현재 README.md 파일이 있는 위치에 env 디렉토리를 생성하고 env 디렉토리 안에 
 docker_token 파일을 생성하여 [docker hub](https://hub.docker.com/settings/security) 
 사이트 접속하여 생성한 Token을 등록합니다.

@@ -43,9 +43,9 @@ docker -v
 
 ### vagrant가 docker 명령어를 사용할 수 있게 만들기
 ```bash
-sudo usermod -a -G docker vagrant : vagrant 계정을 docker 그룹에 가입시키므로 docker 명령어를 sudo 없이 사용가능하다.
-newgrp docker : 그룹 가입시킨 내용을 적용시키는 명령어
-groups : vagrant가 가입한 그룹 목록 확인
+sudo usermod -a -G docker vagrant # vagrant 계정을 docker 그룹에 가입시키므로 docker 명령어를 sudo 없이 사용가능하다.
+newgrp docker  # vagrant를 docker 그룹에 가입시킨 내용을 적용시키는 명령어
+groups # vagrant가 가입한 그룹 목록 확인
 ```
 
 ### Docker Token 등록
@@ -58,3 +58,11 @@ groups : vagrant가 가입한 그룹 목록 확인
 현재 README.md 파일이 있는 위치에 env 디렉토리를 생성하고 env 디렉토리 안에 
 docker_token 파일을 생성하여 [docker hub](https://hub.docker.com/settings/security) 
 사이트 접속하여 생성한 Token을 등록합니다.
+
+### Docker Token으로 로그인 성공하기
+
+도커 토큰 파일을 /vagrant/env/docker_token 경로에 저장합니다.
+```bash
+docker login -u hedgehoon --password-stdin < /vagrant/env/docker_token
+# 해당 경로의 파일에 저장된 도커 토큰을 가져와 hedgehoon이라는 도커 계정으로 자동 로그인 합니다.
+```

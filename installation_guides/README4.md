@@ -29,7 +29,7 @@ docker exec -t jenkins /bin/bash -c "cat /var/jenkins_home/secrets/initialAdminP
 
 ### Jenkins 접속하기
 ```bash
-1.  curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok   
+1. curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok   
 
 2. ngrok config add-authtoken <Your AuthToken(ngrok)> # ngrok 사이트 가입 필요
 

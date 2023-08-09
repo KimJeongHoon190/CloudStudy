@@ -1,5 +1,7 @@
 ## Jenkins 설치 및 사용법
 
+### 사전 준비물 : Ubuntu 20.04에 Docker 설치(README2.md) 파일 완료 
+
 ### 도커 로그인
 ```bash
 docker login -u hedgehoon --password-stdin < /vagrant/env/docker_token

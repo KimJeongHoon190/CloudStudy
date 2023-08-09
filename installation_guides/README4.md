@@ -29,10 +29,13 @@ docker exec -t jenkins /bin/bash -c "cat /var/jenkins_home/secrets/initialAdminP
 
 ### Jenkins 접속하기
 ```bash
-1. snap install ngrok # ngrok 명령어 설치
+1.  curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok   
+
 2. ngrok config add-authtoken <Your AuthToken(ngrok)> # ngrok 사이트 가입 필요
+
 3. cat /home/vagrant/.config/ngrok/ngrok.yml #ngrok 토큰 확인 명령어
 # 참고로 ngrok Auth Token은 홈페이지에서 원할 때마다 Reset해서 새 것으로 바꿀 수 있다.
+
 4. 웹 브라우저에서 192.168.10.14(==실행하는 vagrant 머신의 IP):8080 검색하거나,
 ngrok http 8080 명령을 입력 후에 나오는 링크를 클릭해서 이동하기
 ```

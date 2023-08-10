@@ -49,3 +49,17 @@ docker exec -t jenkins /bin/bash -c "cat /var/jenkins_home/secrets/initialAdminP
 ### install suggested plugins 클릭
 
 ### Getting Started 스크린이 뜨고 기다리면 된다.
+```bash
+컴퓨터 하드웨어 환경에 따라 오래 걸릴 수도 있음
+```
+
+
+### 기본 환경 설정
+```bash
+간단히 admin,admin,admin,<자기 메일주소>,admin 으로 해도 상관없다.
+```
+### URL
+```bash
+그대로 두고 다음 누르기
+```
+### 완료

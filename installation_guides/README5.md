@@ -12,7 +12,7 @@ docker login -u hedgehoon --password-stdin < /vagrant/env/docker_token
 #docker run -it -d -p 8080:8080 --name jenkins jenkins/jenkins:2.387.2-lts 기본(불편하다)
 docker volume create jenkins-volume
 docker volume ls # 볼륨(세이브 포인트) 확인용
-docker run -it -d -p 8080:8080 --restart=always --name jenkins -v jenkins-volume:/var/jenkins_home/ -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --group-add docker jenkins/jenkins:2.387.2-lts 
+docker run -it -d -p 8080:8080 --restart=always --name jenkins -v jenkins-volume:/var/jenkins_home/ -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --group-add 998 jenkins/jenkins:2.387.2-lts # 998은 cat /etc/group해서 나오는 docker 그룹 번호
 # 도커 볼륨을 사용해서 진행 사항을 저장하고(volume) 언제나 자동으로 다시 시작하게(--restart=always) 하려면 제일 위의 주석 처리한 기본 명령어 말고 바로 위의 명령어 세 개를 써라
 ```
 

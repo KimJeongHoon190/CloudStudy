@@ -30,8 +30,8 @@ docker exec -t jenkins /bin/bash -c "cat /var/jenkins_home/secrets/initialAdminP
 ### ngrok를 통해 Jenkins 접속하기
 ```bash
 1. curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok   
-
-2. ngrok config add-authtoken <Your AuthToken(ngrok)> # ngrok 사이트 가입 필요
+# ngrok 다운로드 사이트에서 리눅스 버전으로 다운로드 받는 명령어
+2. ngrok config add-authtoken <Your AuthToken(ngrok)> # AuthToken을 확인하려면 사전에 ngrok 사이트 가입 필요하다
 
 3. cat /home/vagrant/.config/ngrok/ngrok.yml #ngrok 토큰 확인 명령어
 # 참고로 ngrok Auth Token은 홈페이지에서 원할 때마다 Reset해서 새 것으로 바꿀 수 있다.

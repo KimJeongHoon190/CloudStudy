@@ -125,7 +125,8 @@ sudo kubeadm config images pull
 ```bash
 sudo kubeadm init --apiserver-advertise-address 192.168.10.11 \           
  --pod-network-cidr 172.30.0.0/16 --upload-certs \
- --control-plane-endpoint <kube-controller이름>
+ --control-plane-endpoint <kube-controller의 hostname>    
+ # <kube-controller의 hostname> --> 이 실습에선 kube-controller
  # 클러스터 초기 설정 명령어라 계속 쓰면 큰일난다. 왜냐하면 이 명령어를 실행할 때마다
  # 토큰이 계속 새로 발급되기 때문이다.
 ```

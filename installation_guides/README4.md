@@ -1,5 +1,6 @@
 ## Kubernetes 설치 방법
 ### 준비물 : kube-controller, kube-worker-node1, kube-workwer-node2 총 3개 서버 
+### kube-controller 혼자서는 아무것도 못한다. 무조건 worker-node가 있어야한다. worker-node에 pod가 올라가니까
 
 ### 모든 3개 서버에서 진행 : 1~14 단계
 #### 1. 업데이트 및 재부팅

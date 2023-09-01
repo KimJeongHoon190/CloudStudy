@@ -3,7 +3,7 @@ FROM ubuntu:focal
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y
-RUN apt-get install -y openjdk-17-jdk 
+RUN apt-get install -y openjdk-17-jdk git
 RUN apt-get install -y ssh
 RUN mkdir -p /run/sshd
 RUN apt-get clean

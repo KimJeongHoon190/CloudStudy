@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
         ctrl.vm.provider "virtualbox" do |vb|
             vb.name = "kube-controller"
             vb.cpus = 4
-            vb.memory = 8192
+            vb.memory = 4096
         end
         ctrl.vm.network "private_network", ip: "192.168.10.11"
         # ctrl.vm.provision "shell", inline: <<-SCRIPT
@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
         wn1.vm.provider "virtualbox" do |vb|
             vb.name = "kube-worker-node1"
             vb.cpus = 4
-            vb.memory = 4096
+            vb.memory = 2048
         end
         wn1.vm.network "private_network", ip: "192.168.10.12"
     end
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
         wn2.vm.provider "virtualbox" do |vb|
             vb.name = "kube-worker-node2"
             vb.cpus = 4
-            vb.memory = 4096
+            vb.memory = 2048
             vb.customize ["modifyvm", :id, "--nested-hw-virt", "on"]
         end
         wn2.vm.network "private_network", ip: "192.168.10.13"

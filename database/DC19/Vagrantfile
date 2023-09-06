@@ -21,9 +21,9 @@ Vagrant.configure("2") do |config|
             vb.cpus = 4
             vb.memory = 4096
         end
-        mongo2.vm.network "private_network", ip: "192.168.10.10"
+        mongo2.vm.network "private_network", ip: "192.168.10.20"
         mongo2.vm.provision "shell", path: "install_mongodb.sh"
     end
-    
+
     config.vm.provision "file", source: "./install_mongodb.sh", destination: "/vagrant/install_mongodb.sh"
 end

@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/focal64"
+
+    config.vm.define "gw" do |gw|
+        gw.vm.hostname = "gw-server"
+        gw.vm.provider "virtualbox" do |vb|
+            vb.name = "gw-server"
+            vb.cpus = 4
+            vb.memory = 4096
+        end
+        gw.vm.network "private_network", ip: "192.168.10.10"
+        gw.vm.network "public_network", ip: "192.168.101.180", netmask: "255.255.254.0",
+                        gateway: "192.168.100.1"
+    end
+    
+    config.vm.define "mongo2" do |mongo2|
+        mongo2.vm.hostname = "mongo2-server"
+        mongo2.vm.provider "virtualbox" do |vb|
+            vb.name = "mongo2-server"
+            vb.cpus = 4
+            vb.memory = 4096
+        end
+        mongo2.vm.network "private_network", ip: "192.168.10.20"
+        mongo2.vm.provision "shell", path: "install_mongodb.sh"
+    end
+
+    config.vm.provision "file", source: "./install_mongodb.sh", destination: "/vagrant/install_mongodb.sh"
+end

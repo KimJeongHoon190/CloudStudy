@@ -6,23 +6,24 @@ Vagrant.configure("2") do |config|
         gw.vm.provider "virtualbox" do |vb|
             vb.name = "gw-server"
             vb.cpus = 4
-            vb.memory = 4096
+            vb.memory = 8192
         end
         gw.vm.network "private_network", ip: "192.168.10.10"
         gw.vm.network "public_network", ip: "192.168.101.180", netmask: "255.255.254.0",
                         gateway: "192.168.100.1"
     end
     
-    config.vm.define "mongo2" do |mongo2|
-        mongo2.vm.hostname = "mongo2-server"
-        mongo2.vm.provider "virtualbox" do |vb|
-            vb.name = "mongo2-server"
+    config.vm.define "mongo" do |mongo|
+        mongo.vm.hostname = "mongo-server"
+        mongo.vm.provider "virtualbox" do |vb|
+            vb.name = "mongo-server"
             vb.cpus = 4
-            vb.memory = 4096
+            vb.memory = 8192
         end
-        mongo2.vm.network "private_network", ip: "192.168.10.20"
-        mongo2.vm.provision "shell", path: "install_mongodb.sh"
+        mongo.vm.network "private_network", ip: "192.168.10.20"
+        mongo.vm.provision "shell", path: "install_mongodb.sh"
     end
 
     config.vm.provision "file", source: "./install_mongodb.sh", destination: "/vagrant/install_mongodb.sh"
 end
+# MongoDB 샤딩 팀 프로젝트 0907

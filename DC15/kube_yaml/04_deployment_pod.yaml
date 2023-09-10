@@ -15,7 +15,7 @@ spec:
       labels:
         app: web
         type: deploy
-        version: "v1.2"
+        version: "v1.3"
     spec:
       containers:
       - name: nginx

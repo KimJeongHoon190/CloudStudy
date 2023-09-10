@@ -41,7 +41,7 @@ metadata:
 spec:
   containers:
   - name: httpd
-    image: alpine:latest
+    image: httpd:latest
     resources:
       limits:
         memory: "128Mi"

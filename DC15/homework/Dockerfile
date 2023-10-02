@@ -5,8 +5,10 @@ RUN apt-get update \
       curl \
       python-dev
 
+ARG my_ver=1.0      
+
 WORKDIR /root
 COPY hello.py .
-ENV my_ver 1.0
+ENV my_ver $my_ver
 
 CMD ["python", "hello.py", "guest"]

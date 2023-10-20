@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/focal64"
+  
+    config.vm.define "ansibleMaster" do |ansibleMaster|
+      ansibleMaster.vm.hostname = "ansible-server"
+      ansibleMaster.vm.provider "virtualbox" do |vb|
+        vb.name = "ansible-server"
+        vb.cpus = 2
+        vb.memory = 2048
+      end
+      
+      ansibleMaster.vm.network "public_network", bridge: "Wi-Fi"
+  
+      ansibleMaster.vm.provision "shell", inline: <<-SCRIPT
+        sudo apt-add-repository ppa:ansible/ansible
+        sudo apt-get update -y
+        sudo apt-get install -y ansible
+      SCRIPT
+    end
+  
+    config.vm.define "ansibleNode1" do |ansibleNode1|
+      ansibleNode1.vm.hostname = "ansible-node"
+      ansibleNode1.vm.provider "virtualbox" do |vb|
+        vb.name = "ansible-node"
+        vb.cpus = 2
+        vb.memory = 2048
+      end
+      
+      ansibleNode1.vm.network "public_network", bridge: "Wi-Fi"
+    end
+  
+    config.vm.define "ansibleNode2" do |ansibleNode2|
+      ansibleNode2.vm.hostname = "ansible-node"
+      ansibleNode2.vm.provider "virtualbox" do |vb|
+        vb.name = "ansible-node"
+        vb.cpus = 2
+        vb.memory = 2048
+      end
+      
+      ansibleNode2.vm.network "public_network", bridge: "Wi-Fi"
+    end
+  end

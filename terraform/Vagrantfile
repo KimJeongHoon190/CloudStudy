@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/focal64"
+  
+    config.vm.define "terra" do |terra|
+      sshfs.vm.hostname = "terra-server"
+      sshfs.vm.provider "virtualbox" do |vb|
+        vb.name = "terra-server"
+        vb.cpus = 1
+        vb.memory = 2048
+      end
+      sshfs.vm.network "private_network", ip: "192.168.33.30"
+    end
+  end
+  
